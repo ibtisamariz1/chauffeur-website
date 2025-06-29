@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Number One Chauffeur - Melbourne</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <section class="hero">
+    <div class="overlay">
+      <div class="hero-content">
+        <h1>Number One Chauffeur</h1>
+        <p>Luxury Chauffeur Service in Melbourne</p>
+        <a href="#quote" class="btn-primary">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-section" id="quote">
+    <div class="form-container">
+      <h2>Get a Quote</h2>
+      <p>Please fill out the form and we'll get back to you with a quote.</p>
+
+      <form id="booking-form">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="tel" name="phone" placeholder="Phone Number" required>
+  <input type="text" name="pickup" placeholder="Pickup Location" required>
+  <input type="text" name="dropoff" placeholder="Dropoff Location" required>
+  <input type="datetime-local" name="datetime" required>
+  <textarea name="note" placeholder="Special Requests (Optional)"></textarea>
+  <button type="submit" class="btn-submit">Request Quote</button>
+</form>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Number One Chauffeur | Melbourne, Australia</p>
+  </footer>
+<script>
+document.getElementById("booking-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const data = {
+    sheet1: {
+      name: form.name.value,
+      phone: form.phone.value,
+      pickup: form.pickup.value,
+      dropoff: form.dropoff.value,
+      datetime: form.datetime.value,
+      note: form.note.value
+    }
+  };
+
+  fetch("https://api.sheety.co/06715a440d0876e6e992449b57a5e0ee/chauffeurBookings/sheet1", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    if (response.ok) {
+      alert("Booking submitted successfully!");
+      form.reset();
+    } else {
+      alert("There was an error submitting your booking.");
+    }
+  });
+});
+</script>
+
+
+
+</body>
+</html>
