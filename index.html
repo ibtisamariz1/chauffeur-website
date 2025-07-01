@@ -26,12 +26,16 @@
       <form id="booking-form">
   <input type="text" name="name" placeholder="Your Name" required>
   <input type="tel" name="phone" placeholder="Phone Number" required>
-  <input type="text" name="pickup" placeholder="Pickup Location" required>
-  <input type="text" name="dropoff" placeholder="Dropoff Location" required>
+  
+  <!-- ✅ Google Autocomplete works using these IDs -->
+  <input type="text" id="pickup" name="pickup" placeholder="Pickup Location" required>
+  <input type="text" id="dropoff" name="dropoff" placeholder="Dropoff Location" required>
+
   <input type="datetime-local" name="datetime" required>
   <textarea name="note" placeholder="Special Requests (Optional)"></textarea>
   <button type="submit" class="btn-submit">Request Quote</button>
 </form>
+
 
     </div>
   </section>
@@ -39,40 +43,14 @@
   <footer>
     <p>&copy; 2025 Number One Chauffeur | Melbourne, Australia</p>
   </footer>
-<script>
-document.getElementById("booking-form").addEventListener("submit", function (e) {
-  e.preventDefault();
 
-  const form = e.target;
-  const data = {
-    sheet1: {
-      name: form.name.value,
-      phone: form.phone.value,
-      pickup: form.pickup.value,
-      dropoff: form.dropoff.value,
-      datetime: form.datetime.value,
-      note: form.note.value
-    }
-  };
+<!-- Your script.js goes first -->
+<script src="script.js"></script>
 
-  fetch("https://api.sheety.co/06715a440d0876e6e992449b57a5e0ee/chauffeurBookings/sheet1", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => {
-    if (response.ok) {
-      alert("Booking submitted successfully!");
-      form.reset();
-    } else {
-      alert("There was an error submitting your booking.");
-    }
-  });
-});
-</script>
-
+<!-- Google Maps with async & callback -->
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ-xK6bJPZu-V8zN2b4whRPLDVtSBWCxw&libraries=places&callback=initAutocomplete"
+  async defer></script>
 
 
 </body>
