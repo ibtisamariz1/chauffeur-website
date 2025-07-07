@@ -1,5 +1,16 @@
-// ✅ Google Maps Autocomplete — attach to window
-window.initAutocomplete = function () {
+// ✅ fullPage.js initialization
+window.addEventListener("load", function () {
+  new fullpage("#fullpage", {
+    licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
+    autoScrolling: true,
+    scrollHorizontally: true,
+    navigation: true,
+    controlArrows: true,
+  });
+});
+
+// ✅ Google Maps Autocomplete
+function initAutocomplete() {
   const pickup = document.getElementById("pickup");
   const dropoff = document.getElementById("dropoff");
 
@@ -11,15 +22,12 @@ window.initAutocomplete = function () {
 
     new google.maps.places.Autocomplete(pickup, options);
     new google.maps.places.Autocomplete(dropoff, options);
-
-    console.log("Autocomplete initialized ✅");
   } else {
-    console.error("❌ Pickup or dropoff field not found or not HTMLInputElement.");
+    console.error("Pickup or dropoff field not found or not HTMLInputElement.");
   }
-};
+}
 
-
-// ✅ Form submission (safe to use DOMContentLoaded)
+// ✅ Form Submission to Sheety
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("booking-form");
 
@@ -31,10 +39,12 @@ document.addEventListener("DOMContentLoaded", function () {
         sheet1: {
           name: form.name.value,
           phone: form.phone.value,
+          email: form.email.value,
           pickup: form.pickup.value,
           dropoff: form.dropoff.value,
           datetime: form.datetime.value,
-          note: form.note.value
+          note: form.note.value,
+          email: form.email.value
         }
       };
 
@@ -60,3 +70,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// ✅ Auto-Rotate Testimonials
+let currentTestimonial = 0;
+setInterval(() => {
+  const testimonials = document.querySelectorAll(".testimonial");
+  if (testimonials.length === 0) return;
+
+  testimonials.forEach((el, index) => {
+    el.classList.remove("active");
+  });
+  currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+  testimonials[currentTestimonial].classList.add("active");
+}, 5000);
