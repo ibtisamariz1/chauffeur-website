@@ -24,21 +24,23 @@
       <p>Please fill out the form and we'll get back to you with a quote.</p>
 
       <form id="booking-form">
-  <input type="text" name="name" placeholder="Your Name" required>
-  <input type="tel" name="phone" placeholder="Phone Number" required>
-  <input type="email" name="email" placeholder="Your Email (for confirmation)" required>
+        <!-- Form Fields -->
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <input type="email" name="email" placeholder="Your Email (for confirmation)" required>
+        <input type="text" id="pickup" name="pickup" placeholder="Pickup Location" required>
+        <input type="text" id="dropoff" name="dropoff" placeholder="Dropoff Location" required>
+        <input type="datetime-local" name="datetime" required>
+        <textarea name="note" placeholder="Special Requests (Optional)"></textarea>
 
-  
-  <!-- ✅ Google Autocomplete works using these IDs -->
-  <input type="text" id="pickup" name="pickup" placeholder="Pickup Location" required>
-  <input type="text" id="dropoff" name="dropoff" placeholder="Dropoff Location" required>
+        <!-- Hidden FormSubmit Fields -->
+        <input type="hidden" name="_autoresponse" value="Thank you for your booking request. We'll contact you shortly.">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_subject" value="New Chauffeur Booking Request">
+        <input type="hidden" name="_next" value="https://numberonechauffeur.au/thankyou.html">
 
-  <input type="datetime-local" name="datetime" required>
-  <textarea name="note" placeholder="Special Requests (Optional)"></textarea>
-  <button type="submit" class="btn-submit">Request Quote</button>
-</form>
-
-
+        <button type="submit" class="btn-submit">Request Quote</button>
+      </form>
     </div>
   </section>
 
@@ -46,14 +48,9 @@
     <p>&copy; 2025 Number One Chauffeur | Melbourne, Australia</p>
   </footer>
 
-<!-- Your script.js goes first -->
-<script src="script.js"></script>
-
-<!-- Google Maps with async & callback -->
-<script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ-xK6bJPZu-V8zN2b4whRPLDVtSBWCxw&libraries=places&callback=initAutocomplete"
-  async defer></script>
-
-
+  <script src="script.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ-xK6bJPZu-V8zN2b4whRPLDVtSBWCxw&libraries=places&callback=initAutocomplete"
+    async defer></script>
 </body>
 </html>
