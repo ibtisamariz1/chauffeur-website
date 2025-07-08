@@ -30,6 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
+      // ✅ Show Loader
+      const loader = document.getElementById("form-loader");
+      if (loader) loader.style.display = "block";
+
+      // ✅ Get current timestamp
+      const now = new Date().toLocaleString();
+
       const data = {
         sheet1: {
           name: form.name.value,
@@ -38,7 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
           pickup: form.pickup.value,
           dropoff: form.dropoff.value,
           datetime: form.datetime.value,
-          note: form.note.value
+          note: form.note.value,
+          submittedAt: now
         }
       };
 
@@ -53,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => {
           if (!response.ok) throw new Error("Sheety error");
 
-          // ✅ Also send to FormSubmit via hidden form
+          // ✅ Redirect to FormSubmit (email)
           form.action = "https://formsubmit.co/bookings@numberonechauffeur.au";
           form.method = "POST";
           form.submit();
@@ -61,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => {
           console.error("Error submitting booking:", error);
           alert("There was a network error. Please try again.");
+          if (loader) loader.style.display = "none";
         });
     });
   }
